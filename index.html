@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="APK Studio: convierte una idea, tu HTML o tu web en una app Android real (.apk), sin programar.">
+<meta name="theme-color" content="#080C1A">
+<title>APK Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: banda de montaje — la idea entra por la izquierda y el APK sale por la derecha. Tema oscuro único: el fondo siempre más oscuro que el contenido */
+:root{
+  color-scheme:dark;
+  --bg:#080C1A; --bg2:#140A2A; --surface:#161E38; --surface2:#1E2848; --sunk:#0D1328;
+  --ink:#F4F6FF; --mute:#AEB7DA; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.18);
+  --mango:#FF7A2F; --hot:#FF3D7F; --gold:#FFC94D; --mint:#2EE6B8; --sky:#4CC9F0; --berry:#FF4D8D;
+  --mango-ink:#1A0A02; --mint-soft:rgba(46,230,184,.12);
+  --cta:linear-gradient(120deg,#FF8A00 0%,#FF4D6D 55%,#FF3D9A 100%);
+  --glow:0 14px 34px -10px rgba(255,77,109,.55);
+  --card:linear-gradient(160deg,#1C2547 0%,#141B36 100%);
+  --shadow:0 24px 50px -22px rgba(0,0,0,.85);
+  --f-display:"Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body:"Figtree", system-ui, "Segoe UI", Roboto, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  --r:14px;
+}
+*{box-sizing:border-box}
+body{background:radial-gradient(900px 520px at 8% -6%,rgba(46,230,184,.16),transparent 60%),radial-gradient(900px 600px at 100% 4%,rgba(255,61,154,.18),transparent 60%),radial-gradient(1000px 700px at 50% 120%,rgba(76,201,240,.12),transparent 60%),linear-gradient(180deg,var(--bg) 0%,var(--bg2) 55%,var(--bg) 100%);background-color:var(--bg);background-attachment:fixed;color:var(--ink);font:16px/1.6 var(--f-body);padding-inline:16px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1140px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h2{font-size:clamp(30px,4.6vw,48px);font-weight:800}
+h3{font-size:20px;font-weight:700;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:600 12px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.lead{font-size:clamp(17px,2vw,19px);color:var(--mute);max-width:60ch}
+.mono{font-family:var(--f-mono)}
+section{padding-block:72px}
+#editor,#oferta{position:relative}
+#editor::before,#oferta::before{content:"";position:absolute;inset:24px -16px;border-radius:32px;background:linear-gradient(180deg,rgba(76,201,240,.06),rgba(255,61,154,.06));border:1px solid var(--line);z-index:-1}
+#editor,#oferta{padding-inline:clamp(0px,2vw,24px);isolation:isolate}
+.sec-head{display:grid;gap:14px;margin-bottom:38px;max-width:760px}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 22px;font:700 16px/1 var(--f-body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,.copy:focus-visible,summary:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.btn-main{background:var(--cta);color:#fff;box-shadow:var(--glow);text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.btn-main:hover{box-shadow:0 18px 40px -10px rgba(255,77,109,.75)}
+.btn-ghost{border-color:var(--line2);color:var(--ink);background:rgba(255,255,255,.04)}
+.btn-ghost:hover{border-color:var(--mint);color:var(--mint)}
+
+/* barra superior */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-inline:-16px;padding-inline:16px}
+.top .wrap{display:flex;align-items:center;gap:18px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;font:800 20px/1 var(--f-display);text-decoration:none;letter-spacing:-.02em}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(140deg,#1C2547,#0D1328);border:1px solid var(--line2);display:grid;place-items:center}
+.brand-mark svg{width:20px;height:20px}
+.top nav{display:flex;gap:22px;margin-left:auto;font-weight:600;font-size:15px}
+.top nav a{text-decoration:none;color:var(--mute)}
+.top nav a:hover{color:var(--ink)}
+.top .btn{padding:10px 16px;font-size:14px}
+@media (max-width:820px){ .top nav{display:none} .top .btn{margin-left:auto} }
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-block:56px 64px}
+.hero h1{font-size:clamp(44px,7.4vw,92px);font-weight:800;letter-spacing:-.035em}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold) 0%,var(--mango) 40%,var(--hot) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-note{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--mute)}
+.hero-note span{display:inline-flex;gap:6px;align-items:center}
+.hero-note b{color:var(--mint)}
+.stage::before{content:"";position:absolute;inset:8% 6%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,61,154,.35),rgba(76,201,240,.12) 60%,transparent);filter:blur(10px);z-index:0}
+.stage>*{z-index:1}
+.stage{position:relative;min-height:540px;display:grid;place-items:center}
+@media (max-width:900px){ .hero{grid-template-columns:1fr} .stage{min-height:520px} }
+
+/* móvil */
+.phone{width:258px;height:520px;border-radius:40px;background:#05070F;border:1px solid var(--line2);padding:10px;box-shadow:var(--shadow),0 0 0 1px rgba(255,255,255,.06) inset;position:relative;flex:none}
+.screen{width:100%;height:100%;border-radius:31px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:82px;height:20px;border-radius:12px;background:#0B0F0D;z-index:3}
+.xv{background:linear-gradient(180deg,#fff0f6,#fcc2d7);color:#4a1830;font-family:Georgia,"Times New Roman",serif}
+.xv-hero{background:linear-gradient(160deg,#d6336c,#9c36b5);color:#fff;text-align:center;padding:46px 14px 22px}
+.xv-hero small{font:600 9px/1 var(--f-body);letter-spacing:.25em;text-transform:uppercase;opacity:.85}
+.xv-hero b{display:block;font-size:30px;line-height:1;margin:8px 0 4px}
+.xv-hero span{font-size:12px;opacity:.9}
+.count{display:flex;gap:5px;justify-content:center;padding:14px 10px 6px}
+.count div{background:#fff;border-radius:10px;padding:6px 4px;min-width:46px;text-align:center;font:500 8px/1.3 var(--f-body);color:#7a4a5e}
+.count b{display:block;font:700 18px/1 var(--f-body);color:#d6336c}
+.xv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px 12px}
+.xv-grid i{aspect-ratio:1;border-radius:8px;display:block}
+.xv-btn{margin:4px 14px;background:#d6336c;color:#fff;border-radius:999px;text-align:center;font:700 11px/1 var(--f-body);padding:10px}
+.tabbar{margin-top:auto;display:flex;justify-content:space-around;background:#fff;padding:8px 4px 12px;font:600 8px/1.2 var(--f-body);color:#d6336c}
+.tabbar span{text-align:center;opacity:.55}
+.tabbar span:first-child{opacity:1}
+.tabbar i{display:block;font-style:normal;font-size:15px}
+.petal{position:absolute;font-size:12px;opacity:.7;animation:fall 7s linear infinite;z-index:2}
+@keyframes fall{from{transform:translateY(-20px) rotate(0)}to{transform:translateY(520px) rotate(300deg)}}
+
+/* registro de compilación */
+.log{position:absolute;right:-6px;bottom:22px;width:min(300px,78%);background:var(--card);border:1px solid var(--line2);border-radius:var(--r);box-shadow:var(--shadow);padding:14px 16px;font:12px/1.75 var(--f-mono);z-index:4}
+.log-title{display:flex;justify-content:space-between;color:var(--mute);font-size:11px;margin-bottom:6px}
+.log .ok{color:var(--mint)}
+.log .row{display:flex;gap:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.log .apk{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:flex;align-items:center;gap:10px;font-weight:600}
+.apk-ico{width:30px;height:36px;border-radius:5px;background:linear-gradient(160deg,var(--mint),#12A88A);color:#05231B;display:grid;place-items:center;font-size:9px;font-weight:700;flex:none}
+.pkg{position:absolute;left:-4px;top:40px;background:var(--gold);color:#2A1A00;box-shadow:0 10px 24px -10px rgba(255,201,77,.6);font:600 12px/1 var(--f-mono);padding:10px 12px;border-radius:10px;z-index:4;transform:rotate(-4deg)}
+@media (max-width:520px){ .log{right:0;bottom:0} .pkg{left:0;top:6px} }
+
+/* entradas → APK */
+.inputs{display:grid;grid-template-columns:repeat(4,1fr) auto 1fr;gap:10px;align-items:stretch;padding:22px;border-radius:22px;background:linear-gradient(120deg,rgba(76,201,240,.08),rgba(255,61,154,.08));border:1px solid var(--line)}
+.in{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:4px;min-width:0}
+.in b{font:700 16px/1.2 var(--f-display)}
+.in span{font-size:13px;color:var(--mute)}
+.arrow{display:grid;place-items:center;font:700 26px/1 var(--f-display);color:var(--mango)}
+.out{background:var(--cta);color:#fff;box-shadow:var(--glow);border-radius:12px;padding:14px;display:flex;gap:12px;align-items:center}
+.out b{font:700 16px/1.2 var(--f-display)}
+.out span{font:12px/1.4 var(--f-mono);opacity:.75}
+@media (max-width:900px){ .inputs{grid-template-columns:1fr 1fr} .arrow{grid-column:1/-1;transform:rotate(90deg);padding:4px} .out{grid-column:1/-1} }
+
+/* pasos */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;counter-reset:s;border:1px solid var(--line2);border-radius:18px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.step{padding:26px 22px;display:grid;gap:10px;align-content:start;border-right:1px solid var(--line);min-width:0}
+.step:last-child{border-right:0}
+.step-n{font:800 54px/1 var(--f-display);background:var(--cta);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.04em}
+.step p{color:var(--mute);font-size:15px}
+.step .tag{font:600 11px/1 var(--f-mono);color:var(--mint);border:1px solid rgba(46,230,184,.3);background:var(--mint-soft);border-radius:6px;padding:6px 8px;justify-self:start}
+@media (max-width:900px){ .steps{grid-template-columns:1fr 1fr} .step:nth-child(2){border-right:0} .step:nth-child(-n+2){border-bottom:1px solid var(--line)} }
+@media (max-width:540px){ .steps{grid-template-columns:1fr} .step{border-right:0;border-bottom:1px solid var(--line)} .step:last-child{border-bottom:0} }
+
+/* editor */
+.editor{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.feat{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;padding:22px;display:grid;gap:12px;align-content:start;min-width:0}
+.feat p{color:var(--mute);font-size:15px}
+.f-wide{grid-column:span 3}
+.f-third{grid-column:span 2}
+@media (max-width:900px){ .editor{grid-template-columns:1fr 1fr} .f-wide,.f-third{grid-column:span 1} }
+@media (max-width:600px){ .editor{grid-template-columns:1fr} }
+.mini{background:var(--sunk);border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:8px;font-size:13px}
+.sel{outline:2px solid var(--berry);outline-offset:2px;border-radius:6px;padding:4px 8px;background:#fff0f6;color:#a61e4d;font:700 15px/1.3 Georgia,serif}
+.props{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:12px;color:var(--mute)}
+.sw{display:flex;gap:5px}.sw i{width:18px;height:18px;border-radius:5px;display:block}
+.bar{height:6px;border-radius:9px;background:var(--surface2);position:relative}.bar::after{content:"";position:absolute;inset:0 45% 0 0;border-radius:9px;background:linear-gradient(90deg,var(--mint),var(--sky))}
+.scr{display:flex;gap:6px;flex-wrap:wrap}
+.scr span{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12px;font-weight:600}
+.scr span.on{border-color:var(--mango);color:var(--mango)}
+.acts{display:grid;gap:6px}
+.acts div{display:flex;justify-content:space-between;gap:10px;background:var(--surface2);border-radius:8px;padding:7px 10px;font-size:13px}
+.acts div span{color:var(--gold);font-family:var(--f-mono);font-size:11px;white-space:nowrap}
+.themes{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.themes i{aspect-ratio:1;border-radius:9px;display:block;border:1px solid var(--line)}
+
+/* plantillas */
+.tpls{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.tpl{display:grid;gap:10px;min-width:0}
+.tpl-ph{aspect-ratio:9/17;border-radius:22px;background:#05070F;border:1px solid var(--line2);box-shadow:var(--shadow);padding:6px;max-width:100%}
+.tpl-sc{height:100%;border-radius:17px;overflow:hidden;display:flex;flex-direction:column;font-size:8px}
+.tpl-hd{padding:20px 8px 12px;color:#fff;text-align:center;font:700 13px/1.1 var(--f-display)}
+.tpl-bd{flex:1;display:grid;gap:5px;padding:8px;align-content:start}
+.tpl-bd i{display:block;border-radius:5px;height:18px;background:rgba(255,255,255,.8)}
+.tpl-bd i.s{height:34px}
+.tpl-nav{display:flex;justify-content:space-around;background:rgba(255,255,255,.95);padding:6px 2px;font-size:10px}
+.tpl b{font:700 15px/1.2 var(--f-display)}
+.tpl span{font-size:12px;color:var(--mute)}
+@media (max-width:900px){ .tpls{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:520px){ .tpls{grid-template-columns:repeat(2,1fr)} }
+
+/* apps nativas */
+.native{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.nlist{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.nlist div{padding:14px 16px;border-radius:14px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--mint);display:grid;gap:2px;min-width:0}
+.nlist b{font-weight:700}
+.nlist span{font-size:14px;color:var(--mute)}
+.bridge{background:var(--sunk);color:var(--ink);border:1px solid var(--line2);border-radius:18px;padding:22px;font:13px/1.8 var(--f-mono);overflow-x:auto}
+.bridge .c{opacity:.55}
+.bridge .k{color:var(--gold)}
+@media (max-width:900px){ .native{grid-template-columns:1fr} }
+@media (max-width:480px){ .nlist{grid-template-columns:1fr} }
+
+/* para quién */
+.who{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.who div{border-top:3px solid var(--hot);padding:16px;border-radius:0 0 14px 14px;background:var(--card);display:grid;gap:6px;min-width:0}
+.who b{font:700 18px/1.2 var(--f-display)}
+.who span{font-size:14px;color:var(--mute)}
+@media (max-width:900px){ .who{grid-template-columns:1fr 1fr} }
+
+/* comparación */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line2);border-radius:18px;background:var(--card);box-shadow:var(--shadow)}
+table.cmp{width:100%;border-collapse:collapse;min-width:560px;font-size:15px}
+.cmp th,.cmp td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.cmp tr:last-child td{border-bottom:0}
+.cmp th{font:600 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.cmp th.us,.cmp td.us{background:var(--mint-soft);color:var(--mint)}
+.cmp th.us{color:var(--mint)}
+.cmp td.us{font-weight:600}
+
+/* oferta */
+.offer{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.plan{border:1px solid var(--line2);background:var(--card);box-shadow:var(--shadow);border-radius:22px;padding:28px;display:grid;gap:18px;align-content:start;min-width:0}
+.plan.hot{border:2px solid transparent;background:linear-gradient(160deg,#241C4A,#151B38) padding-box,var(--cta) border-box;box-shadow:0 30px 60px -24px rgba(255,61,154,.5)}
+.plan h3{font-size:26px}
+.plan .who-for{color:var(--mute)}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.plan li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:15px}
+.plan li::before{content:"✓";color:var(--mint);font-weight:800}
+.price{font:800 30px/1 var(--f-display);color:var(--gold);letter-spacing:-.02em}
+.price small{display:block;font:500 14px/1.4 var(--f-body);color:var(--mute);letter-spacing:0;margin-top:6px}
+.badge{justify-self:start;background:var(--gold);color:#2A1A00;font:700 12px/1 var(--f-mono);padding:7px 10px;border-radius:999px;letter-spacing:.04em}
+@media (max-width:800px){ .offer{grid-template-columns:1fr} }
+
+/* preguntas */
+.faq{display:grid;gap:10px;max-width:820px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.faq summary{cursor:pointer;font:700 17px/1.35 var(--f-display);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:22px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:10px;color:var(--mute)}
+
+/* contacto */
+.contact{background:radial-gradient(600px 300px at 0% 0%,rgba(255,138,0,.28),transparent 60%),radial-gradient(600px 340px at 100% 100%,rgba(46,230,184,.22),transparent 60%),linear-gradient(135deg,#2A1250,#10284A);color:var(--ink);border:1px solid var(--line2);box-shadow:var(--shadow);border-radius:28px;padding:clamp(28px,5vw,56px);display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}
+.contact h2{color:var(--ink)}
+.contact .lead{color:var(--mute)}
+.cards{display:grid;gap:10px}
+.ccard{background:rgba(8,12,26,.55);border:1px solid var(--line2);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;min-width:0}
+.ccard div{display:grid;gap:2px;min-width:0;flex:1}
+.ccard small{font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.ccard b{font:600 17px/1.3 var(--f-body);user-select:all;overflow-wrap:anywhere}
+.copy{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line2);border-radius:999px;padding:7px 12px;font:600 13px/1 var(--f-body);cursor:pointer;flex:none}
+.contact .btn-main{justify-self:start}
+@media (max-width:860px){ .contact{grid-template-columns:1fr} }
+
+footer{padding-block:34px 44px;color:var(--mute);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:64px}
+
+@media (prefers-reduced-motion:reduce){ .petal{animation:none} .btn{transition:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="APK Studio">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="3" stroke="#3DD39B" stroke-width="2"/><path d="M10 18h4" stroke="#FF8A3D" stroke-width="2" stroke-linecap="round"/></svg></span>
+      APK Studio
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#como">Cómo funciona</a>
+      <a href="#editor">Editor</a>
+      <a href="#plantillas">Plantillas</a>
+      <a href="#oferta">Oferta</a>
+      <a href="#preguntas">Preguntas</a>
+    </nav>
+    <a class="btn btn-main" href="https://wa.me/5355081288?text=Hola%20Ra%C3%BAl%2C%20quiero%20informaci%C3%B3n%20sobre%20APK%20Studio" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main class="wrap" id="inicio">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Idea · HTML · Web → app Android</span>
+      <h1>Tu idea,<br>instalada en <em>el móvil.</em></h1>
+      <p class="lead">APK Studio convierte una idea, tu propio HTML o tu página web en una <b>app Android real (.apk)</b> que se instala en cualquier móvil. Sin programar: tocas, cambias y descargas.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-main" href="https://wa.me/5355081288?text=Hola%20Ra%C3%BAl%2C%20quiero%20APK%20Studio" target="_blank" rel="noopener">Quiero APK Studio →</a>
+        <a class="btn btn-ghost" href="#como">Ver cómo funciona</a>
+      </div>
+      <div class="hero-note">
+        <span><b>✓</b> APK firmado e instalable</span>
+        <span><b>✓</b> IA gratis incluida</span>
+        <span><b>✓</b> Funciona sin internet</span>
+      </div>
+    </div>
+
+    <div class="stage" aria-label="Ejemplo: app de XV años creada con APK Studio">
+      <div class="pkg">com.dafne.xv · v1.0.0</div>
+      <div class="phone">
+        <div class="screen xv">
+          <div class="notch"></div>
+          <span class="petal" style="left:12%;animation-delay:-1s">🌸</span>
+          <span class="petal" style="left:58%;animation-delay:-4s">🌸</span>
+          <span class="petal" style="left:82%;animation-delay:-2.5s">🌸</span>
+          <div class="xv-hero"><small>Bienvenidos</small><b>Mis XV Años</b><span>Dafne Daniela · 15 de noviembre</span></div>
+          <div class="count"><div><b>38</b>días</div><div><b>06</b>horas</div><div><b>21</b>min</div><div><b>40</b>seg</div></div>
+          <div class="xv-grid">
+            <i style="background:linear-gradient(135deg,#f8c8dc,#c9a7ff)"></i><i style="background:linear-gradient(135deg,#ffd8a8,#fcc2d7)"></i><i style="background:linear-gradient(135deg,#d0bfff,#a5d8ff)"></i>
+            <i style="background:linear-gradient(135deg,#fcc2d7,#ffdeeb)"></i><i style="background:linear-gradient(135deg,#e599f7,#fcc2d7)"></i><i style="background:linear-gradient(135deg,#ffc9c9,#eebefa)"></i>
+          </div>
+          <div class="xv-btn">📸 Añadir mis fotos al álbum</div>
+          <div class="xv-btn" style="background:#25D366">💬 Confirmar asistencia</div>
+          <div class="tabbar"><span><i>🏠</i>Inicio</span><span><i>📸</i>Galería</span><span><i>📅</i>Agenda</span><span><i>💌</i>Confirmar</span></div>
+        </div>
+      </div>
+      <div class="log" aria-hidden="true">
+        <div class="log-title"><span>Crear APK</span><span>4 min 12 s</span></div>
+        <div class="row"><span class="ok">✓</span>Proyecto preparado</div>
+        <div class="row"><span class="ok">✓</span>Fotos y vídeos subidos</div>
+        <div class="row"><span class="ok">✓</span>Compilado y firmado</div>
+        <div class="apk"><span class="apk-ico">APK</span><span>mis-xv.apk<br><span style="font-weight:400;color:var(--mute)">listo · QR para descargar</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRADAS -->
+  <div class="inputs" aria-label="Formas de empezar">
+    <div class="in"><b>Una idea</b><span>La describes y la IA crea la app</span></div>
+    <div class="in"><b>Una plantilla</b><span>6 apps completas para personalizar</span></div>
+    <div class="in"><b>Tu HTML</b><span>Un archivo o un .zip con tu web</span></div>
+    <div class="in"><b>Tu web</b><span>La que ya tienes publicada</span></div>
+    <div class="arrow" aria-hidden="true">→</div>
+    <div class="out"><span class="apk-ico">APK</span><div><b>App Android</b><br><span>icono · nombre · permisos</span></div></div>
+  </div>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="como">
+    <div class="sec-head">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Cuatro pasos, de la idea al APK.</h2>
+      <p class="lead">Todo pasa en una sola pantalla del navegador. No hay nada que instalar en tu ordenador.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-n">1</span><h3>Crear</h3><p>Escribe tu idea, elige una plantilla, sube tu HTML o pega la dirección de tu web.</p><span class="tag">IA gratis · sin clave</span></div>
+      <div class="step"><span class="step-n">2</span><h3>Editar</h3><p>Toca cualquier parte de la app en el móvil de prueba y cámbiala: textos, fotos, colores, botones.</p><span class="tag">editor visual</span></div>
+      <div class="step"><span class="step-n">3</span><h3>Configurar</h3><p>Nombre, icono, colores, orientación y permisos de cámara, GPS, micrófono o notificaciones.</p><span class="tag">com.tunombre.app</span></div>
+      <div class="step"><span class="step-n">4</span><h3>Crear APK</h3><p>Se compila gratis en la nube y recibes el enlace de descarga con un código QR.</p><span class="tag">3–6 minutos</span></div>
+    </div>
+  </section>
+
+  <!-- EDITOR -->
+  <section id="editor">
+    <div class="sec-head">
+      <span class="eyebrow">El editor</span>
+      <h2>Tocas, cambias y lo ves al instante.</h2>
+      <p class="lead">Un editor pensado para quien no programa. Cada cambio se guarda, se puede deshacer y se prueba en un móvil simulado.</p>
+    </div>
+    <div class="editor">
+      <div class="feat f-wide">
+        <h3>Toca cualquier cosa para editarla</h3>
+        <p>Textos, colores, tamaño de letra, fuente, fondos con foto, esquinas, sombras. Cambia fotos y vídeos con un botón.</p>
+        <div class="mini">
+          <span class="sel">Mis XV Años</span>
+          <div class="props"><span>Color</span><span class="sw"><i style="background:#d6336c"></i><i style="background:#ae3ec9"></i><i style="background:#1c7ed6"></i><i style="background:#0ca678"></i><i style="background:#f59f00"></i></span><span>Tamaño</span><span class="bar"></span><span>Fuente</span><span>Elegante</span></div>
+        </div>
+      </div>
+      <div class="feat f-wide">
+        <h3>Varias pantallas conectadas</h3>
+        <p>Crea pantallas de Galería, Vídeos, Documentos, Agenda o Contacto. El menú inferior se arma solo y el botón atrás del móvil funciona.</p>
+        <div class="mini"><div class="scr"><span>🏠 Inicio</span><span class="on">📸 Galería</span><span>📅 Agenda</span><span>💌 Confirmar</span><span>＋ Nueva</span></div></div>
+      </div>
+      <div class="feat f-third">
+        <h3>Acción al tocar</h3>
+        <p>Cualquier botón o tarjeta puede abrir algo.</p>
+        <div class="mini acts">
+          <div>Ver vídeo <span>YouTube</span></div>
+          <div>Ver documento <span>PDF</span></div>
+          <div>Leer más <span>texto</span></div>
+          <div>Escríbenos <span>WhatsApp</span></div>
+        </div>
+      </div>
+      <div class="feat f-third">
+        <h3>Ambientes y efectos</h3>
+        <p>10 temas listos, fondos con tu foto, 8 tipos de letra y efectos animados: pétalos, corazones, confeti.</p>
+        <div class="mini themes">
+          <i style="background:linear-gradient(180deg,#fff0f6,#fcc2d7)"></i><i style="background:linear-gradient(180deg,#1a1a1a,#2b2410)"></i><i style="background:linear-gradient(160deg,#f3e8ff,#e0c3fc)"></i><i style="background:linear-gradient(180deg,#0b1020,#1b2a4e)"></i><i style="background:linear-gradient(180deg,#f4fce3,#d3f9d8)"></i>
+        </div>
+      </div>
+      <div class="feat f-third">
+        <h3>Banco de 35 elementos</h3>
+        <p>Portada, galería, carrusel, cuenta regresiva, itinerario, productos, precios, mapa, formulario a WhatsApp, música de fondo y más.</p>
+      </div>
+      <div class="feat f-wide">
+        <h3>El álbum vivo</h3>
+        <p>Quien instala tu app puede añadir fotos y vídeos desde su propio móvil. Se guardan en la app, se ven en grande y se comparten o se guardan en la galería. Ideal para fiestas, bodas y eventos.</p>
+      </div>
+      <div class="feat f-wide">
+        <h3>IA que trabaja contigo</h3>
+        <p>Pídele cambios con tus palabras: «añade una sección de horarios», «ponlo en verde». Usa IA gratis sin clave, tus propias claves o, si no hay conexión, una plantilla que siempre funciona.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANTILLAS -->
+  <section id="plantillas">
+    <div class="sec-head">
+      <span class="eyebrow">Plantillas</span>
+      <h2>Seis apps completas para empezar hoy.</h2>
+      <p class="lead">Cada una trae cuatro pantallas conectadas, diseño y botones listos. Solo cambias textos y fotos.</p>
+    </div>
+    <div class="tpls">
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:linear-gradient(180deg,#fff0f6,#fcc2d7)"><div class="tpl-hd" style="background:linear-gradient(160deg,#d6336c,#9c36b5)">Mis XV</div><div class="tpl-bd"><i class="s"></i><i></i><i></i></div><div class="tpl-nav">🏠 📸 📅 💌</div></div></div><b>XV años / Evento</b><span>Cuenta regresiva, galería, álbum, confirmación</span></div>
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:#f1f3f5"><div class="tpl-hd" style="background:linear-gradient(160deg,#1c7ed6,#1864ab)">Mi Negocio</div><div class="tpl-bd"><i class="s" style="background:#fff"></i><i style="background:#fff"></i><i style="background:#fff"></i></div><div class="tpl-nav">🏠 🛍️ 🔥 📞</div></div></div><b>Negocio / tienda</b><span>Catálogo con «Pedir por WhatsApp»</span></div>
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:linear-gradient(180deg,#1a1a1a,#2b2410)"><div class="tpl-hd" style="background:linear-gradient(160deg,#b8860b,#7a5a07)">Restaurante</div><div class="tpl-bd"><i class="s" style="background:#3a3220"></i><i style="background:#3a3220"></i><i style="background:#3a3220"></i></div><div class="tpl-nav">🏠 📋 📅 📍</div></div></div><b>Restaurante</b><span>Menú, reservas y ubicación</span></div>
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:linear-gradient(180deg,#0b1020,#1b2a4e)"><div class="tpl-hd" style="background:linear-gradient(160deg,#4dabf7,#1971c2)">Mi Curso</div><div class="tpl-bd"><i class="s" style="background:#22305a"></i><i style="background:#22305a"></i><i style="background:#22305a"></i></div><div class="tpl-nav">🏠 🎬 📚 ❓</div></div></div><b>Curso / clases</b><span>Lecciones en vídeo y material PDF</span></div>
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:#121212"><div class="tpl-hd" style="background:linear-gradient(160deg,#ff6b6b,#c92a2a)">Mi Estudio</div><div class="tpl-bd"><i class="s" style="background:#2a2a2a"></i><i style="background:#2a2a2a"></i><i style="background:#2a2a2a"></i></div><div class="tpl-nav">🏠 🖼️ 🙋 📞</div></div></div><b>Portafolio</b><span>Trabajos, sobre mí y contacto</span></div>
+      <div class="tpl"><div class="tpl-ph"><div class="tpl-sc" style="background:linear-gradient(180deg,#f4fce3,#d3f9d8)"><div class="tpl-hd" style="background:linear-gradient(160deg,#2f9e44,#2b8a3e)">Comunidad</div><div class="tpl-bd"><i class="s"></i><i></i><i></i></div><div class="tpl-nav">🏠 📰 📚 📞</div></div></div><b>Información / comunidad</b><span>Noticias, recursos y avisos</span></div>
+    </div>
+  </section>
+
+  <!-- APPS NATIVAS -->
+  <section>
+    <div class="native">
+      <div class="sec-head" style="margin-bottom:0">
+        <span class="eyebrow">Lo que hacen tus apps</span>
+        <h2>Apps Android de verdad, no un enlace con icono.</h2>
+        <p class="lead">Cada APK sale firmado, con tu nombre, tu icono y tus permisos. Las actualizaciones se instalan encima sin perder los datos.</p>
+        <div class="bridge" aria-label="Funciones nativas disponibles para programadores">
+          <span class="c">// funciones nativas en tus apps</span><br>
+          <span class="k">Android</span>.shareFile(foto, "xv.jpg", "image/jpeg")<br>
+          <span class="k">Android</span>.saveFile(foto, "xv.jpg", "image/jpeg")<br>
+          <span class="k">Android</span>.vibrate(200)<br>
+          <span class="k">Android</span>.toast("¡Gracias por venir!")
+        </div>
+      </div>
+      <div class="nlist">
+        <div><b>Sin internet</b><span>El contenido viaja dentro de la app</span></div>
+        <div><b>Cámara, micrófono, GPS</b><span>Pide permiso la primera vez</span></div>
+        <div><b>Compartir y guardar</b><span>Fotos a WhatsApp o a la galería</span></div>
+        <div><b>Vídeo, audio y PDF</b><span>Se ven dentro de la app</span></div>
+        <div><b>WhatsApp, llamadas, correo</b><span>Abren su app al tocar</span></div>
+        <div><b>YouTube</b><span>Dentro de la app o en YouTube</span></div>
+        <div><b>Elegir fotos y archivos</b><span>Desde formularios y álbumes</span></div>
+        <div><b>Descargas</b><span>A la carpeta del móvil</span></div>
+        <div><b>Versión web con QR</b><span>Para probar sin instalar</span></div>
+        <div><b>Proyecto Android completo</b><span>Para Android Studio si lo necesitas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUIÉN -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Para quién</span>
+      <h2>Para quien tiene algo que mostrar.</h2>
+    </div>
+    <div class="who">
+      <div><b>Negocios</b><span>Catálogo, precios, ofertas y pedidos por WhatsApp.</span></div>
+      <div><b>Eventos</b><span>XV años, bodas y cumpleaños con álbum compartido.</span></div>
+      <div><b>Profesores</b><span>Clases en vídeo y material en PDF en una app.</span></div>
+      <div><b>Creadores</b><span>Portafolios de fotografía, diseño, música.</span></div>
+      <div><b>Comunidades</b><span>Avisos, noticias y recursos para tu grupo.</span></div>
+    </div>
+  </section>
+
+  <!-- COMPARACIÓN -->
+  <section>
+    <div class="sec-head">
+      <span class="eyebrow">Comparación</span>
+      <h2>Lo mismo que encargar una app, a tu ritmo.</h2>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead><tr><th></th><th>Encargar a un programador</th><th class="us">APK Studio</th></tr></thead>
+        <tbody>
+          <tr><td>Tiempo hasta tener la app</td><td>Semanas</td><td class="us">El mismo día</td></tr>
+          <tr><td>Cambiar un texto o una foto</td><td>Pedirlo y esperar</td><td class="us">Lo haces tú en segundos</td></tr>
+          <tr><td>Saber programar</td><td>No, pero dependes de otra persona</td><td class="us">No hace falta</td></tr>
+          <tr><td>Actualizaciones</td><td>Cada cambio es un encargo</td><td class="us">Ilimitadas, se instalan encima</td></tr>
+          <tr><td>Tus archivos</td><td>Según el acuerdo</td><td class="us">Proyecto y copia de seguridad siempre tuyos</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- OFERTA -->
+  <section id="oferta">
+    <div class="sec-head">
+      <span class="eyebrow">Oferta</span>
+      <h2>Elige cómo quieres tu app.</h2>
+      <p class="lead">Escríbeme por WhatsApp y te digo el precio actual y la forma de pago que te venga mejor.</p>
+    </div>
+    <div class="offer">
+      <div class="plan hot">
+        <span class="badge">LA MÁS PEDIDA</span>
+        <h3>Licencia APK Studio</h3>
+        <p class="who-for">Para crear y editar tus propias apps todas las veces que quieras.</p>
+        <ul>
+          <li>APK Studio completo (versión 7, multipantalla)</li>
+          <li>6 plantillas de app y 35 elementos editables</li>
+          <li>Apps ilimitadas y actualizaciones de tus apps</li>
+          <li>Tutorial completo en español</li>
+          <li>Ayuda para preparar tu cuenta y tu primer APK</li>
+          <li>Soporte por WhatsApp</li>
+        </ul>
+        <p class="price">Consultar precio<small>Pago único · pregunta por la forma de pago</small></p>
+        <a class="btn btn-main" href="https://wa.me/5355081288?text=Hola%20Ra%C3%BAl%2C%20quiero%20la%20licencia%20de%20APK%20Studio" target="_blank" rel="noopener">Pedir la licencia →</a>
+      </div>
+      <div class="plan">
+        <h3>Te la hago yo</h3>
+        <p class="who-for">Para quien prefiere recibir la app terminada.</p>
+        <ul>
+          <li>Diseño de tu app con tus textos, fotos y vídeos</li>
+          <li>Varias pantallas, botones y acciones a medida</li>
+          <li>Icono, nombre y permisos configurados</li>
+          <li>APK listo para instalar y compartir</li>
+          <li>Copia del proyecto para cambios futuros</li>
+        </ul>
+        <p class="price">Según tu app<small>Cuéntame tu idea y te paso un presupuesto</small></p>
+        <a class="btn btn-ghost" href="https://wa.me/5355081288?text=Hola%20Ra%C3%BAl%2C%20quiero%20que%20me%20hagas%20una%20app" target="_blank" rel="noopener">Pedir presupuesto →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS -->
+  <section id="preguntas">
+    <div class="sec-head">
+      <span class="eyebrow">Preguntas</span>
+      <h2>Lo que suelen preguntar.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>¿Necesito saber programar?</summary><p>No. Todo se hace tocando y escribiendo en el editor visual. El código está disponible solo si alguna vez lo quieres ver.</p></details>
+      <details><summary>¿Qué necesito para usarlo?</summary><p>Un ordenador o un móvil con Chrome o Edge y conexión a internet para crear el APK. Para editar no hace falta internet.</p></details>
+      <details><summary>¿Cómo se instala la app en el móvil?</summary><p>Abres el enlace de descarga o escaneas el código QR, tocas el archivo .apk y aceptas instalar. Si aparece Play Protect, eliges «Instalar de todos modos», que es lo normal en apps propias.</p></details>
+      <details><summary>¿Puedo cambiar la app después de instalarla?</summary><p>Sí. Cambias lo que quieras, creas el APK de nuevo y lo instalas encima. Los datos, como las fotos del álbum, se conservan.</p></details>
+      <details><summary>¿Puedo subir la app a Google Play?</summary><p>Sí, con una cuenta de desarrollador de Google. APK Studio también genera el proyecto Android completo por si quieres publicarla.</p></details>
+      <details><summary>¿Cuántas apps puedo crear?</summary><p>Las que quieras. Guardas una copia de cada proyecto y la abres cuando quieras seguir trabajando en ella.</p></details>
+      <details><summary>¿Funciona en Cuba?</summary><p>Sí. Si en tu red algún servicio de IA o GitHub está bloqueado, una VPN lo resuelve, y las plantillas funcionan siempre, incluso sin conexión.</p></details>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="contact">
+      <div style="display:grid;gap:18px;min-width:0">
+        <span class="eyebrow">Hablemos</span>
+        <h2>¿Tienes una idea para una app?</h2>
+        <p class="lead">Escríbeme, cuéntame qué quieres mostrar y te digo cómo hacerla con APK Studio.</p>
+        <a class="btn btn-main" href="https://wa.me/5355081288?text=Hola%20Ra%C3%BAl%2C%20tengo%20una%20idea%20para%20una%20app" target="_blank" rel="noopener">Escribir por WhatsApp →</a>
+      </div>
+      <div class="cards">
+        <div class="ccard"><div><small>Autor</small><b>Raúl Cordero García</b></div></div>
+        <div class="ccard"><div><small>WhatsApp · móvil</small><b id="tel">+53 5508 1288</b></div><button class="copy" type="button" data-copy="+5355081288">Copiar</button></div>
+        <div class="ccard"><div><small>Correo</small><b id="mail">corderorauly@gmail.com</b></div><button class="copy" type="button" data-copy="corderorauly@gmail.com">Copiar</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span><b>APK Studio</b> · Idea o HTML → app Android</span>
+    <span>© 2026 Raúl Cordero García</span>
+  </footer>
+</main>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    var done=function(){ b.textContent='Copiado'; setTimeout(function(){ b.textContent='Copiar'; },1600); };
+    var fallback=function(){ var el=b.previousElementSibling.querySelector('b'); var r=document.createRange(); r.selectNodeContents(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Seleccionado'; };
+    try{ navigator.clipboard.writeText(t).then(done,fallback); }catch(e){ fallback(); }
+  });
+});
+</script>
+</body>
+</html>
