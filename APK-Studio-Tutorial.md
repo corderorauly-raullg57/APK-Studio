@@ -1,6 +1,6 @@
 # 📱 APK Studio — Tutorial completo
 
-**Versión 7 · multipantalla**
+**Versión 8.4 · revisada**
 Convierte una idea, un HTML o una web en una **app Android (.apk) real**, sin saber programar.
 
 ---
@@ -8,7 +8,7 @@ Convierte una idea, un HTML o una web en una **app Android (.apk) real**, sin sa
 ## Índice
 
 1. [¿Qué es APK Studio?](#1-qué-es-apk-studio)
-2. [Antes de empezar](#2-antes-de-empezar)
+2. [Antes de empezar](#2-antes-de-empezar) · [Prueba gratis y licencia](#prueba-gratis-de-3-días-y-licencia-de-por-vida)
 3. [Vista general: los 4 pasos](#3-vista-general-los-4-pasos)
 4. [Paso 1 · Crear](#4-paso-1--crear)
 5. [Paso 2 · Editar](#5-paso-2--editar)
@@ -21,13 +21,14 @@ Convierte una idea, un HTML o una web en una **app Android (.apk) real**, sin sa
 12. [Solución de problemas](#12-solución-de-problemas)
 13. [Preguntas frecuentes](#13-preguntas-frecuentes)
 14. [Ejemplo completo: app de XV años](#14-ejemplo-completo-app-de-xv-años)
+    · [Novedades de la versión 8](#novedades-de-la-versión-8)
 15. [Contacto](#15-contacto)
 
 ---
 
 ## 1. ¿Qué es APK Studio?
 
-APK Studio es **un solo archivo** (`apk-studio.html`) que se abre en el navegador (Chrome, Edge…) y permite:
+APK Studio es un **programa para Windows** (también existe como archivo `apk-studio.html` que se abre en Chrome o Edge) y permite:
 
 | Puedes… | Cómo |
 |---|---|
@@ -35,30 +36,41 @@ APK Studio es **un solo archivo** (`apk-studio.html`) que se abre en el navegado
 | 🧩 Empezar con una **plantilla** | 6 apps completas listas para personalizar |
 | 📥 Convertir **tu propio HTML** | Un archivo `.html` o un `.zip` con tu web completa |
 | 🌐 Convertir **una web publicada** | La app abre tu web con icono propio |
-| 🎨 **Editar visualmente** | Tocas cualquier parte y la cambias |
+| 🎨 **Editar visualmente** | Tocas cualquier parte y la cambias: **todos los textos**, fotos, colores, botones |
+| 🖼️ Hacer **portadas profesionales** | Texto sobre tu foto con **34 letras** elegantes y efectos |
 | 📦 Obtener un **APK real** | Lo compila GitHub gratis y te da el enlace de descarga |
 
-Todo se guarda **en tu navegador**. Nada se envía a ningún sitio, salvo a la IA que uses y a tu cuenta de GitHub cuando creas el APK.
+Todo se guarda **en tu ordenador**. Nada se envía a ningún sitio, salvo a la IA que uses y a tu cuenta de GitHub cuando creas el APK.
 
 ---
 
 ## 2. Antes de empezar
 
 ### Lo que necesitas
-- Un ordenador o móvil con **Chrome** o **Edge** actualizados (recomendado).
+- Un **ordenador con Windows** para el programa APK Studio (o Chrome / Edge actualizados si usas el archivo `.html`).
 - Internet para la IA y para crear el APK. **Editar funciona sin internet.**
 - Una **cuenta gratis de GitHub** (solo para crear el APK, ver el [paso 4](#7-paso-4--crear-el-apk)).
 
-### ⚠️ Regla de oro: dónde vive tu proyecto
-Tu proyecto se guarda **dentro del navegador, ligado a la ubicación exacta del archivo** `apk-studio.html`.
+### Prueba gratis de 3 días y licencia de por vida
+1. **Pide APK Studio por WhatsApp** al [+53 5508 1288](https://wa.me/5355081288).
+2. Recibirás el **enlace de descarga en MEGA**. Descárgalo e instálalo en tu ordenador con Windows.
+3. Durante **3 días** lo usas **completo y sin límites**.
+4. Al terminar la prueba, APK Studio te pide una **contraseña de activación**.
+5. Paga **15 USD** (pago único) por **QvaPay** y recibirás por WhatsApp tu contraseña.
+6. Escríbela en APK Studio: queda activado **de por vida**, sin mensualidades y con apps ilimitadas.
 
-- Ábrelo siempre **con el mismo navegador** y **desde la misma carpeta**.
+> Las apps que crees durante la prueba **no se pierden**: al activar la licencia sigues trabajando en ellas.
+
+### ⚠️ Regla de oro: dónde vive tu proyecto
+Tu proyecto se guarda **dentro de APK Studio, en tu ordenador**. Si usas el archivo `apk-studio.html`, queda **ligado al navegador y a la ubicación exacta del archivo**.
+
+- Si usas el archivo `.html`, ábrelo siempre **con el mismo navegador** y **desde la misma carpeta**.
 - Cuando recibas una versión nueva, **colócala en la misma carpeta y con el mismo nombre** que la anterior (renombra la vieja, por ejemplo `apk-studio-viejo.html`).
 - **No borres los datos ni el historial del navegador** sin haber guardado antes una copia.
 - Pulsa **💾 Guardar copia** con frecuencia (ver [sección 10](#10-copias-de-seguridad-y-actualizaciones)).
 
 ### Cómo saber qué versión tienes
-Arriba a la derecha aparece una etiqueta verde, por ejemplo **«v7 · multipantalla»**.
+Arriba a la derecha aparece una etiqueta verde, por ejemplo **«v8.1 · textos»**.
 
 ---
 
@@ -75,9 +87,18 @@ Arriba a la derecha aparece una etiqueta verde, por ejemplo **«v7 · multipanta
 
 Puedes moverte entre pasos cuando quieras con la barra superior. En la parte de arriba siempre tienes:
 
+- **🆕 Nuevo proyecto** — empieza una app desde cero (ver abajo).
 - **💾 Guardar copia** — descarga una copia completa del proyecto.
 - **📂 Abrir copia** — recupera un proyecto guardado.
 - **💾 guardado hh:mm** — indica la última vez que se autoguardó.
+
+### 🆕 Empezar un proyecto nuevo
+1. Pulsa **🆕 Nuevo proyecto**.
+2. APK Studio te ofrece **💾 Guardar copia y empezar de nuevo** (recomendado) para no perder la app actual.
+3. Se borra todo lo del proyecto anterior (pantallas, fotos, vídeos, historial y configuración de la app) y vuelves al **Paso 1 · Crear**.
+4. **Se conservan** tu llave de GitHub y tus claves de IA, para que no tengas que ponerlas otra vez.
+
+> Para volver a la app anterior, usa **📂 Abrir copia** con el archivo que guardaste.
 
 ---
 
@@ -139,13 +160,14 @@ Hay tres formas de editar (pestañas superiores): **🎨 Diseño visual**, **�
 
 ### 5.1 🎨 Diseño visual
 
-Tiene cinco sub‑pestañas:
+Tiene seis sub‑pestañas: **➕ Añadir · 📄 Pantallas · ✏️ Editar · 📝 Textos · 🌈 Ambiente · 🧱 Estructura**.
 
 #### ➕ Añadir — banco de elementos
 Toca un elemento y se coloca **debajo de lo que tengas seleccionado** (o al final de la pantalla actual). Luego tócalo en el móvil para personalizarlo.
 
 | Categoría | Elementos |
 |---|---|
+| **Portadas con foto** ✨ | Portada elegante · Portada moderna · Portada con marco · Portada revista · Foto con frase · Título elegante |
 | **Básicos** | Título · Texto · Botón · Imagen · Separador · Espacio |
 | **Secciones** | Portada · Tarjeta · Itinerario · Lista de precios · Frase/dedicatoria · Cabecera con «atrás» · Artículo · Preguntas frecuentes · Productos |
 | **Fotos y vídeo** | Galería de fotos · **Álbum (fotos del móvil)** · Vídeo propio · Vídeo de YouTube · Carrusel de fotos · Lista de vídeos |
@@ -153,7 +175,7 @@ Toca un elemento y se coloca **debajo de lo que tengas seleccionado** (o al fina
 | **Contacto** | Botón WhatsApp · Botón llamar · Mapa · Redes sociales |
 | **Botones y acciones** | Documentos PDF · Lista de botones · Menú de tarjetas · Botón «ver texto» · Botón «ver vídeo» · Botón «ver PDF» |
 
-> Al añadir **Imagen**, **Galería**, **Carrusel**, **Vídeo** o **Música**, se abre directamente el selector para subir tu archivo.
+> Al añadir **Imagen**, **Galería**, **Carrusel**, **Vídeo**, **Música** o una **Portada**, se abre directamente el selector para subir tu archivo.
 
 #### 📄 Pantallas — apps con varias pantallas
 - **Lista de pantallas**: la primera (⭐) es la de inicio.
@@ -171,33 +193,109 @@ Toca cualquier elemento en el móvil (modo ✋ Editar). Aparece resaltado en ros
 
 - **Migas** (arriba): saltar al bloque que lo contiene.
 - **Contenido** (según el elemento):
-  - **Texto**: escribe el nuevo texto (los saltos de línea se respetan).
-  - **Imagen**: 📷 Cambiar foto · ajuste (rellenar / ver completa) · texto alternativo · ampliar al tocar.
+  - **Texto**: escribe el nuevo texto (los saltos de línea se respetan). **Mientras escribes, el cambio se ve al momento en el móvil**; se guarda al pulsar fuera del cuadro.
+  - **📝 Textos de este bloque**: si tocas una tarjeta o un bloque, aparecen **todos sus textos juntos** para cambiarlos sin romper el diseño.
+  - **🔤 Otros textos**: textos que no se ven a simple vista (la respuesta de un botón, la descripción de una foto, el texto de ayuda de un buscador…).
+  - **Texto creado por el código**: en apps hechas con la IA, las listas (productos, tareas, platos…) las crea el código. Al tocar uno de esos textos, el editor te muestra su texto para cambiarlo y te deja cambiar su **color, tamaño, letra, negrita y alineación**; el cambio de aspecto se aplica a **todos los elementos iguales** (por ejemplo, todos los títulos de la lista). Si el texto se calcula al usar la app (un número, una fecha, lo que escribe la persona), solo se puede cambiar su aspecto.
+  - **Imagen**: 📷 Cambiar foto · 🗑️ Quitar esta foto · ajuste (rellenar / ver completa) · texto alternativo · ampliar al tocar.
   - **Vídeo**: 🎬 Elegir vídeo · reproducir solo · repetir.
   - **Galería**: miniaturas con ✕ para quitar · ➕ Añadir fotos · número de columnas.
-  - **Álbum**: permitir fotos y vídeos, o solo fotos.
+  - **Álbum**: permitir fotos y vídeos, o solo fotos · **texto que se muestra cuando aún no hay fotos**.
   - **Cuenta regresiva**: fecha y hora del evento.
   - **Música**: 🎵 Elegir canción · empezar al tocar la pantalla.
-  - **Efecto animado**: tipo (corazones, estrellas, confeti, pétalos, mariposas, burbujas, nieve, notas, hojas, dinero) y cantidad.
+  - **Efecto animado**: dónde se ve (**toda la pantalla**, **solo sobre el elemento de arriba** o **solo dentro de su bloque**) · tipo (corazones, estrellas, confeti, pétalos, mariposas, burbujas, nieve, notas, hojas, dinero) y cantidad.
   - **Mapa**: dirección.
   - **Vídeo de YouTube**: enlace.
   - **Formulario**: número de WhatsApp de destino.
 - **👆 Acción al tocar** — ver [sección 5.2](#52--acción-al-tocar).
 - **Estilo**: color de texto · fondo (color, degradado o 📷 foto) · tamaño de letra · negrita · cursiva · alineación · fuente · esquinas redondeadas · relleno · separación · ancho · transparencia · sombra.
+- **Grupos profesionales** (según lo que toques):
+  - **🖼️ Portada: foto y texto** — ver la sección **5.1.1 Portadas con texto sobre foto**.
+  - **🖼️ Efectos de imagen**: **📝 Poner texto encima de esta foto** · filtros (B/N, Sepia, Vintage, Vivo, Cálido, Frío, Suave…) · formas (Redondeada, Círculo, Polaroid, Flotante, Marco dorado).
+  - **✨ Efectos de texto**: letra (34 tipos) · sombra suave o fuerte · neón · contorno · relieve · 3D · **color en degradado** (Dorado, Rosa, Atardecer, Océano, Lila, Plata…) · espacio entre letras · altura de línea · MAYÚSCULAS · fondo resaltado · subrayado.
+  - **🔲 Borde y fondo en degradado**: grosor, tipo (línea, discontinua, puntos, doble) y color del borde; fondo con dos colores y dirección.
+  - **🎬 Animación al aparecer**: Aparecer · Subir · Bajar · Desde la izquierda/derecha · Acercar · Girar · Latido · Flotar, con **retraso** para que salgan una tras otra. Al elegirla, se reproduce **solo en lo que tienes seleccionado**. En ✋ Editar nada se mueve solo; en ▶️ Probar se ven como en la app instalada.
+  - **📋 Copiar estilo / 📌 Pegar estilo**: copia el aspecto de un elemento y pégalo en otro con un toque · **🧽 Quitar estilos**.
 - **Acciones**: ⬆️ Subir · ⬇️ Bajar · ⧉ Duplicar · 🗑️ Borrar · ➕ Añadir debajo.
+
+#### ☑️ Varios elementos a la vez
+Para dar **la misma acción, estilo, efecto o animación** a varias cosas de una vez (por ejemplo, todas las fotos de una galería):
+
+| Cómo | Qué hace |
+|---|---|
+| **Shift + clic** | Toca la primera foto y luego, con **Shift** apretado, la última: se eligen **todas las de en medio** |
+| **Ctrl + clic** | Suma o quita una sola |
+| **☑️ Seleccionar iguales de este bloque** | Botón del panel ✏️ Editar: elige todas las iguales (útil en pantallas táctiles) |
+
+- Arriba del panel verás **«☑️ Seleccionados: 6 fotos»**, y en el móvil todas quedan marcadas en rosa.
+- El panel muestra solo lo que se puede aplicar a todas, en este orden: **👆 Acción al tocar → Estilo → Efectos → Animación**. El texto y la foto de cada una **se conservan**.
+- **La acción no se aplica sola.** Al elegirla aparece un aviso que explica qué va a pasar, por ejemplo: *«Vas a poner "Agrandar esta foto al tocarla" en las 4 fotos. Cada foto se agrandará a sí misma.»* Pulsa **✅ Aplicar** o **✕ Cancelar**.
+- El estilo, los efectos y la animación sí se aplican al momento (y se pueden deshacer).
+
+**Ejemplo: que todas las fotos se vean en grande al tocarlas**
+1. Toca la primera foto. Con **Shift** apretado, toca la última.
+2. En **👆 Acción al tocar** elige **🔍 Agrandar esta foto al tocarla**.
+3. Lee el aviso y pulsa **✅ Aplicar a las N**.
+4. Pulsa **▶️ Probar** y toca una foto: se abre en grande y puedes pasar a las demás con el dedo.
+
+> Las fotos de una **Galería** ya se agrandan solas: no hace falta ponerles acción.
+- **📷 Cambiar las N por otras** (si son fotos): eliges las fotos nuevas y se ponen en el mismo orden.
+- **🗑️ Borrar los N** borra todas las elegidas · **✕ Quitar la selección** vuelve a una sola. Un clic normal también vuelve a una sola.
+- **↩️ Deshacer** deshace el cambio en todas a la vez.
 
 #### 🌈 Ambiente — aspecto de toda la app
 - **10 temas listos**: Quinceañera, Dorado, Lila sueño, Noche azul, Boda blanca, Natural, Neón, Infantil, Oscuro, Claro.
 - **Fondo** de toda la app: colores, degradados o **una foto tuya**.
 - **Color principal** (botones, títulos, elementos del banco).
-- **Color del texto** y **letra** (Moderna, Elegante, Clásica, Manuscrita, Redondeada, Divertida, Impacto, Máquina).
+- **Color del texto** y **letra de toda la app**: 26 letras profesionales (Great Vibes, Dancing Script, Playfair Display, Cinzel, Montserrat, Bebas Neue, Lobster…) y 8 del propio móvil.
 - **Efecto animado** en toda la app.
 - **↺ Quitar ambiente** para volver al diseño original.
 
 > Si una sección mantiene su propio fondo, tócala y cámbialo en ✏️ Editar.
 
+#### 📝 Textos — todos los textos en un sitio
+Muestra **todos los textos de tu app**, ordenados por pantalla:
+- Textos de cada pantalla y del **menú inferior**.
+- **🔤 Textos ocultos**: ayudas de los buscadores, respuestas, descripciones de fotos.
+- **⚙️ Textos dentro del código**: listas y mensajes de las apps creadas con la IA.
+
+Cambia el que quieras y pulsa fuera del cuadro para guardarlo. Usa **🔎 Buscar** para encontrar un texto y el enlace **ver** para ir a él en el móvil.
+
+> Ideal para personalizar una plantilla rápido: cambias todos los nombres, fechas y frases sin tocar el móvil.
+
 #### 🧱 Estructura
 Lista ordenada de todas las partes de la app. Toca una para seleccionarla (aunque esté en otra pantalla) o muévela con ⬆️⬇️.
+
+### 5.1.1 🖼️ Portadas con texto sobre foto
+Dan un aspecto profesional a la primera pantalla, a una invitación o a una presentación.
+
+**Crear una portada nueva**
+1. **➕ Añadir → Portadas con foto** y elige un modelo:
+
+   | Modelo | Estilo |
+   |---|---|
+   | 💫 Portada elegante | Letra manuscrita al centro (ideal para XV y bodas) |
+   | 🎞️ Portada moderna | Título grande abajo con degradado |
+   | 🖼️ Portada con marco | Texto dentro de un marco fino |
+   | 📰 Portada revista | Letras grandes tipo revista arriba |
+   | 💬 Foto con frase | Una frase o dedicatoria sobre la foto |
+
+2. Elige **tu foto**. La portada aparece con los textos ya colocados.
+3. **Toca cada texto** para cambiarlo, su letra, su color o su efecto.
+4. **Toca la foto** (o pulsa **🖼️ Editar la foto de esta portada**) para ajustar:
+   - **📷 Cambiar foto** y **punto de enfoque**.
+   - **Capa sobre la foto**: ninguna · oscura pareja · degradado abajo · degradado arriba · viñeta · dos colores, con su **color** e **intensidad** (para que el texto se lea bien).
+   - **Texto**: arriba, centro o abajo · alineación izquierda, centro o derecha.
+   - **Altura** de la portada.
+   - **➕ Añadir otro texto** o **➕ Añadir botón**.
+
+**Convertir una foto que ya tienes**
+Toca la foto en el móvil → **🖼️ Efectos de imagen → 📝 Poner texto encima de esta foto**.
+
+### 5.1.2 ✒️ Letras elegantes
+- Hay **34 letras**: 26 profesionales en cinco grupos (**Manuscrita**, **Elegante**, **Moderna**, **Impacto**, **Divertida**) y 8 del propio móvil.
+- Las profesionales **se guardan dentro de la app**, así que el APK las muestra **sin internet**.
+- ⚠️ Para guardarlas necesitas **internet en el momento de elegirlas**. Si no había conexión, APK Studio te avisa: vuelve a elegirla cuando tengas internet.
 
 ### 5.2 👆 Acción al tocar
 **Cualquier** botón, tarjeta, imagen o texto puede hacer algo al tocarlo:
@@ -211,7 +309,8 @@ Lista ordenada de todas las partes de la app. Toca una para seleccionarla (aunqu
 | 🎬 Ver mi vídeo | Subir vídeo | Lo reproduce a pantalla completa |
 | 📄 Ver documento PDF | Subir PDF + título | Muestra el PDF página a página, con zoom y compartir |
 | 📖 Mostrar un texto | Título + texto | Abre una ventana con el texto (se puede compartir) |
-| 🖼️ Ver una imagen | Subir imagen | La muestra en grande |
+| 🔍 Agrandar esta foto | — (solo en fotos) | La propia foto se ve en grande; se pasa a las vecinas con el dedo |
+| 🖼️ Ver una imagen | En una foto: ella misma (o **Elegir otra imagen**) | La muestra en grande |
 | 🎵 Reproducir audio | Subir audio | Reproduce / pausa |
 | 🌐 Abrir página web | Dirección | Abre el navegador |
 | 💬 WhatsApp | Número + mensaje | Abre el chat con el mensaje escrito |
@@ -392,13 +491,23 @@ En el paso 1, **🤖 Motor de IA**:
 | El móvil dice «App no instalada» al actualizar | Cambiaste el **identificador** o se perdió la llave de firma. Desinstala la versión anterior e instala la nueva |
 | Play Protect bloquea la instalación | **Más detalles → Instalar de todos modos** |
 | Un PDF se abre con otra app | Al subirlo no había internet para preparar sus páginas. Vuelve a subirlo con conexión |
+| Una letra elegante no se ve en la app | Se eligió sin internet. Conéctate y vuelve a elegir esa letra |
+| No encuentro dónde cambiar un texto | Ve a **📝 Textos** y búscalo con **🔎 Buscar** |
+| Un texto dice que «se calcula mientras se usa la app» | Es un número, fecha o dato que cambia solo. Puedes cambiar su aspecto o pedir el cambio en **🤖 IA** |
+| Los cambios tardan en verse | Actualiza a la versión **8.2**. Los cambios grandes (añadir bloques, cambiar el tema) todavía recargan la vista: con muchos vídeos pesados tardan unos segundos |
+| El panel dice «Toca otra vez el elemento» | Pasa tras **Deshacer** o un cambio de la IA: el elemento que tenías elegido ya no existe. Tócalo de nuevo en el móvil |
+| Las animaciones no se mueven | Se ven en **▶️ Probar** y en la app instalada, no en modo ✋ Editar |
+| Terminó la prueba de 3 días | Escribe por WhatsApp para recibir tu **contraseña de activación** |
 
 ---
 
 ## 13. Preguntas frecuentes
 
-**¿Cuesta dinero?**
-No. APK Studio, la IA gratis, GitHub y la compilación son gratuitos.
+**¿Cuánto cuesta?**
+APK Studio se prueba **gratis 3 días**. La licencia cuesta **15 USD, pago único**, y es **de por vida**. La IA gratis, GitHub y la compilación del APK no cuestan nada.
+
+**¿Cómo pago y activo la licencia?**
+Pagas por **QvaPay** y recibes por WhatsApp tu **contraseña**. La escribes en APK Studio cuando te la pida y queda activado para siempre.
 
 **¿Necesito saber programar?**
 No. Todo se hace tocando y escribiendo. El código está disponible solo si lo quieres.
@@ -421,18 +530,35 @@ Sí. Guarda una copia de cada proyecto y ábrela con **📂 Abrir copia** cuando
 
 1. **Paso 1** → **🧩 XV años / Evento**.
 2. **Paso 2 · 🎨 Diseño visual**:
-   - Toca el título «Mis XV Años» → escribe *«Los XV de Dafne Daniela»*.
+   - **➕ Añadir → Portadas con foto → 💫 Portada elegante** → elige la foto de la quinceañera.
+   - Toca el título de la portada → escribe *«Dafne Daniela»* → en **✨ Efectos de texto** elige color **Dorado** y sombra suave.
+   - Toca la foto → **Capa: degradado abajo** y texto **abajo**.
+   - **📝 Textos** → cambia de una vez nombres, fechas y frases de todas las pantallas.
    - Toca la **cuenta regresiva** → pon la fecha y hora de la fiesta.
    - **📄 Pantallas** → 👁️ **Galería** → toca la galería → **➕ Añadir fotos** (elige las tuyas).
    - Toca el **mapa** → escribe la dirección del salón.
    - **📄 Pantallas** → 👁️ **Confirmar** → toca el formulario → pon tu número de WhatsApp.
    - **➕ Añadir → Música de fondo** → elige la canción del vals.
-   - **🌈 Ambiente** → tema **💗 Quinceañera** y efecto **🌸 Pétalos**.
+   - **🌈 Ambiente** → tema **💗 Quinceañera**, letra **Great Vibes** y efecto **🌸 Pétalos**.
+   - Toca la galería → **🎬 Animación al aparecer → Subir**.
    - Pulsa **▶️ Probar** y recorre la app.
 3. **💾 Guardar copia**.
 4. **Paso 3**: nombre *«XV Dafne»*, icono 👑, color rosa.
 5. **Paso 4** → **🚀 Crear mi APK** → espera 3–6 min → escanea el **QR** con el móvil → instala.
 6. Comparte el enlace con los invitados: podrán ver la galería, la agenda, confirmar por WhatsApp y **subir sus propias fotos al álbum** desde su móvil.
+
+---
+
+## Novedades de la versión 8
+
+| Versión | Qué trae |
+|---|---|
+| **8.4 · revisada** | Revisión completa con cientos de combinaciones de uso · tras **Deshacer** o cambios de la IA el editor se actualiza solo (antes había que reiniciar para editar textos) · animaciones solo en lo seleccionado · efecto animado en una sola parte · cambiar o quitar fotos, también varias a la vez |
+| **8.3 · varios a la vez** | Acción **🔍 Agrandar esta foto** · con varios elegidos la acción **se confirma** antes de aplicarse y nunca abre ventanas de archivo solas · panel ordenado · corregido el bloqueo al dar una acción a varias fotos |
+| **8.2 · rápido** | Los cambios de texto, color, tamaño y efectos se ven **al instante** (antes se recargaba toda la app) · los vídeos grandes ya no frenan la vista previa · **varios elementos a la vez** con Shift + clic, Ctrl + clic o «Seleccionar iguales» |
+| **8.1 · textos** | **Todos los textos se pueden cambiar**: textos de bloques, textos ocultos y textos creados por el código · cambio **en directo** al escribir · nueva pestaña **📝 Textos** · texto del álbum vacío |
+| **8 · editor pro** | **Portadas con texto sobre foto** (5 modelos) · **34 letras** guardadas dentro de la app · efectos de texto, imagen, borde y degradado · **animaciones** al aparecer · copiar y pegar estilo |
+| **7.1** | Botón **🆕 Nuevo proyecto** |
 
 ---
 
@@ -445,5 +571,6 @@ Sí. Guarda una copia de cada proyecto y ábrela con **📂 Abrir copia** cuando
 | 👤 **Autor** | Raúl Cordero García |
 | ✉️ **Correo** | [corderorauly@gmail.com](mailto:corderorauly@gmail.com) |
 | 📱 **Móvil / WhatsApp** | [+53 5508 1288](https://wa.me/5355081288) |
+| 🔑 **Licencia** | 15 USD · pago único por QvaPay · de por vida |
 
 *APK Studio — Idea o HTML → app Android real.*
